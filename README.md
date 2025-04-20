@@ -1,4 +1,4 @@
-# AI Crash Course
+# AI Engineer Crash Course
 
 Following this crash course via the instructional video, you can fast-track your skills to become an AI Engineer.
 
