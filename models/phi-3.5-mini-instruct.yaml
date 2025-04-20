@@ -1,0 +1,14 @@
+name: phi-3.5-mini-instruct
+parameters:
+  model: bartowski/phi-3.5-mini-instruct.gguf
+  type: phi-3.5-mini-instruct
+  format: gguf
+backend: llama-cpp
+context_size: 8192
+gpu_layers: 0
+threads: 4 # Adjust based on your CPU cores. Assume 1 thread per core
+batch_size: 64 # You might want to experiment with values 32, 64 or 128
+f16: true
+download_files:
+  - filename: bartowski/phi-3.5-mini-instruct.gguf
+    uri: https://huggingface.co/bartowski/Phi-3.5-mini-instruct-GGUF/resolve/main/Phi-3.5-mini-instruct-Q6_K.gguf

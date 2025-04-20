@@ -1,0 +1,30 @@
+services:
+  localai:
+    image: localai/localai:v2.25.0-ffmpeg-core
+    ports:
+      - 8080:8080
+    environment:
+      - LOG_LEVEL=INFO
+      - MODELS_PATH=/models
+    volumes:
+      - ../models:/models:cached
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/v1/models"]
+      interval: 600s
+      timeout: 5s
+      retries: 5
+      # Allows for initial model downloads
+      # In a production environment, you likely want to pre-cache the AI model
+      start_period: 100000s
+      start_interval: 5s
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - LLM_API_BASE=http://localai:8080/v1
+    depends_on:
+      localai:
+        condition: service_healthy
+    restart: "no"
